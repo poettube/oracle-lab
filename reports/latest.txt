@@ -1,1 +1,15 @@
-Nothing scored yet — add results with the 'result' command.
+
+=== PICK3 ===
+Method                  tix  str  box wildS wildB pair  any 2+dig avgDig
+Historic Hot-Cold         3    0    0     0     0    0    0     0   0.33
+Hot-Cold                  3    0    0     0     0    0    0     0   0.67
+I Ching                   3    0    0     0     0    0    0     0   1.00
+Ifa                       3    0    0     0     0    0    0     2   1.33
+Napoleon's Oraculum       3    0    0     0     0    0    0     0   0.33
+Overdue                   3    0    0     0     0    0    0     1   1.00
+Prime                     3    0    0     0     0    0    0     0   1.00
+Random Control            3    0    0     0     0    0    0     0   1.00
+Recurring Pairs           3    0    0     0     0    0    0     0   0.67
+Tarot                     3    0    0     0     0    0    0     1   1.00
+Chance per ticket: any digit-match avg 0.73; 2+ digits ~13%; straight 0.1%; front/back pair 1% each.
+Compare every method to 'Random Control'. Small samples swing a lot — judge after 30+ drawings.
