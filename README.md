@@ -2,7 +2,7 @@
 
 A locked, reproducible test of symbolic (I Ching, Tarot, Ifá, Napoleon's Oraculum, Dream-Symbolic)
 and statistical (Hot-Cold, Historic Hot-Cold, Prime, Overdue, Recurring Pairs, Unpopular Numbers)
-lottery methods against a Random Control, for PA Pick 3 (with Wild Ball), Powerball and Mega Millions.
+lottery methods against a Random Control, for PA Pick 3 and Pick 4 (with Wild Ball), Powerball and Mega Millions.
 
 - `oracle_lab.py` — the tool (see its header for commands)
 - `picks.jsonl` — every locked batch, SHA-256 hash-chained (`python3 oracle_lab.py verify`)

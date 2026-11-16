@@ -28,8 +28,9 @@
   <section class="ol-card" id="methods">
     <div class="ol-row">
       <h2>Methods vs. chance</h2>
-      <select class="dash-select" data-draw="gamepick" aria-label="Game">
+      <select class="dash-select ol-gamepick" aria-label="Game">
         <option value="pick3">PA Pick 3</option>
+        <option value="pick4">PA Pick 4</option>
         <option value="powerball">Powerball</option>
         <option value="megamillions">Mega Millions</option>
       </select>
@@ -82,7 +83,7 @@
     }],
   });
 
-  const GAME_NAMES = { pick3: 'PA Pick 3', powerball: 'Powerball', megamillions: 'Mega Millions' };
+  const GAME_NAMES = { pick3: 'PA Pick 3', pick4: 'PA Pick 4', powerball: 'Powerball', megamillions: 'Mega Millions' };
   const fmt3 = d3.format('.2f');
 
   for (const [name, field] of [['s_scored', 'scored_tickets'], ['s_draws', 'scored_drawings'], ['s_pending', 'pending_tickets']]) {
@@ -92,9 +93,13 @@
     });
   }
 
-  dash.draw('gamepick', (sel) => {
-    sel.value = dash.params().game || 'pick3';
-    sel.onchange = () => dash.setParams({ game: sel.value });
+  for (const sel of document.querySelectorAll('.ol-gamepick')) {
+    sel.addEventListener('change', () => dash.setParams({ game: sel.value }));
+  }
+  dash.onData(() => {
+    for (const sel of document.querySelectorAll('.ol-gamepick')) {
+      if (document.activeElement !== sel) sel.value = dash.params().game || 'pick3';
+    }
   });
 
   dash.draw('methods', (tb) => {

@@ -40,6 +40,26 @@
   "status": "pending"
  },
  {
+  "game": "pick4",
+  "date": "2026-11-16",
+  "draw": "Evening",
+  "locked_et": "2026-11-15 09:29:12 PM ET",
+  "lock_code": "fb4e8d265441f530",
+  "methods": 10,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "pick4",
+  "date": "2026-11-16",
+  "draw": "Day",
+  "locked_et": "2026-11-15 09:29:11 PM ET",
+  "lock_code": "9464d91336398a96",
+  "methods": 10,
+  "result": "",
+  "status": "pending"
+ },
+ {
   "game": "pick3",
   "date": "2026-11-15",
   "draw": "Evening",

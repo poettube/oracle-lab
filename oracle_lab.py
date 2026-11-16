@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ORACLE LAB v2 — a fair, locked, reproducible test of symbolic and statistical
-lottery methods for PA Pick 3 (with Wild Ball), Powerball, and Mega Millions.
+lottery methods for PA Pick 3 and Pick 4 (with Wild Ball), Powerball, and Mega Millions.
 
 Every method below is a FIXED rule written once and never changed mid-test.
 Every random step uses the operating system's cryptographic RNG (secrets),
@@ -40,6 +40,7 @@ rng = secrets.SystemRandom()
 # --------------------------------------------------------------------------
 GAMES = {
     "pick3":        dict(kind="digits", n=3, draws=["Day", "Evening"]),
+    "pick4":        dict(kind="digits", n=4, draws=["Day", "Evening"]),
     "powerball":    dict(kind="lotto", n=5, main=69, bonus=26, bonus_name="Powerball", draws=["Main"]),
     "megamillions": dict(kind="lotto", n=5, main=70, bonus=24, bonus_name="Mega Ball", draws=["Main"]),
 }
@@ -160,7 +161,7 @@ def build_ticket(game, cast, record):
     g = GAMES[game]
     if g["kind"] == "digits":
         digs = []
-        for _ in range(3):
+        for _ in range(g["n"]):
             v, rec = cast(); record.append(rec); digs.append(v % 10)
         return "".join(map(str, digs)), None
     main = []
@@ -197,32 +198,33 @@ def stat_tickets(game, draw, method):
     if len(h) < 10:
         return None, {"skipped": f"only {len(h)} results on file; need 10+"}
     if g["kind"] == "digits":
+        N = g["n"]
         res = [r["numbers"] for r in h]
         U = list("0123456789")
         win = res[-30:]
         freq = Counter("".join(win))
         if method == "Hot-Cold":
             hot = ranked(freq, U); cold = ranked(freq, U, reverse=False)
-            pos = [ranked(Counter(r[i] for r in win), U)[0] for i in range(3)]
-            t = ["".join(hot[:3]), "".join(pos), hot[0] + hot[1] + cold[0]]
-            return t, {"window": len(win), "hot": hot[:3], "cold": cold[:3]}
+            pos = [ranked(Counter(r[i] for r in win), U)[0] for i in range(N)]
+            t = ["".join(hot[:N]), "".join(pos), "".join(hot[:N-1]) + cold[0]]
+            return t, {"window": len(win), "hot": hot[:N], "cold": cold[:N]}
         if method == "Historic Hot-Cold":
             af = Counter("".join(res)); hot = ranked(af, U); cold = ranked(af, U, reverse=False)
-            t = ["".join(hot[:3]), "".join(cold[:3]), hot[0] + cold[0] + hot[1]]
-            return t, {"window": "all %d draws" % len(res), "hot": hot[:3], "cold": cold[:3]}
+            t = ["".join(hot[:N]), "".join(cold[:N]), hot[0] + cold[0] + "".join(hot[1:N-1])]
+            return t, {"window": "all %d draws" % len(res), "hot": hot[:N], "cold": cold[:N]}
         if method == "Prime":
             P = list("2357"); af = Counter("".join(res)); gp = gaps([list(r) for r in res], P)
             recent = ranked(freq, P); alltime = ranked(af, P)
             od = sorted(P, key=lambda u: (-gp[u], rng.random()))
-            t = ["".join(recent[:3]), "".join(alltime[:3]), "".join(od[:3])]
+            t = ["".join(recent[:N]), "".join(alltime[:N]), "".join(od[:N])]
             return t, {"primes": P, "recent_rank": recent, "alltime_rank": alltime, "overdue_rank": od}
         if method == "Overdue":
             gp = gaps([list(r) for r in res], U)
             od = sorted(U, key=lambda u: (-gp[u], rng.random()))
-            posg = [gaps([[r[i]] for r in res], U) for i in range(3)]
-            p1 = "".join(sorted(U, key=lambda u: (-posg[i][u], rng.random()))[0] for i in range(3))
-            p2 = "".join(sorted(U, key=lambda u: (-posg[i][u], rng.random()))[1] for i in range(3))
-            return ["".join(od[:3]), p1, p2], {"most_overdue": od[:3]}
+            posg = [gaps([[r[i]] for r in res], U) for i in range(N)]
+            p1 = "".join(sorted(U, key=lambda u: (-posg[i][u], rng.random()))[0] for i in range(N))
+            p2 = "".join(sorted(U, key=lambda u: (-posg[i][u], rng.random()))[1] for i in range(N))
+            return ["".join(od[:N]), p1, p2], {"most_overdue": od[:N]}
         if method == "Recurring Pairs":
             pc = Counter()
             for r in res[-90:]:
@@ -230,7 +232,7 @@ def stat_tickets(game, draw, method):
             pairs = ranked(pc, [a + b for a, b in itertools.combinations(U, 2)])[:3]
             hot = ranked(freq, U); t = []
             for p in pairs:
-                third = next(d for d in hot if d not in p); t.append(p + third)
+                rest = [d for d in hot if d not in p][:N-2]; t.append(p + "".join(rest))
             return t, {"top_pairs": pairs}
     else:
         mains = [r["numbers"] for r in h]; bon = [r["bonus"] for r in h]
@@ -319,7 +321,7 @@ def predict(game, date, draw, dream=None, only=None):
         if g["kind"] == "digits":  # fixed rule: a repeated ticket is rotated one place
             seen = []
             for i, t in enumerate(ts):
-                for _ in range(3):
+                for _ in range(g["n"]):
                     if t not in seen: break
                     t = t[1:] + t[0]
                 seen.append(t); ts[i] = t
@@ -332,7 +334,7 @@ def predict(game, date, draw, dream=None, only=None):
             t = [sorted(rng.sample(range(32, g["main"] + 1), 5)), rng.randint(g["bonus"] // 2 + 1, g["bonus"])]
             entries.append(dict(method="Unpopular Numbers", ticket=t, casting={"rule": "whites 32-max, bonus upper half"}))
     for k in range(PICKS_PER_METHOD if use("Random Control") else 0):
-        if g["kind"] == "digits": t = "".join(str(secrets.randbelow(10)) for _ in range(3))
+        if g["kind"] == "digits": t = "".join(str(secrets.randbelow(10)) for _ in range(g["n"]))
         else: t = [sorted(rng.sample(range(1, g["main"] + 1), 5)), secrets.randbelow(g["bonus"]) + 1]
         entries.append(dict(method="Random Control", ticket=t, casting={"rng": "secrets"}))
     batch = dict(game=game, date=date, draw=draw, methods_filter=only, locked_utc=now.isoformat(timespec="seconds"),
@@ -383,7 +385,7 @@ def load_results():
     out = []
     for r in csv.DictReader(open(RESULTS)):
         g = GAMES[r["game"]]
-        if g["kind"] == "digits": r["numbers"] = r["numbers"].zfill(3)
+        if g["kind"] == "digits": r["numbers"] = r["numbers"].zfill(g["n"])
         else: r["numbers"] = sorted(int(x) for x in r["numbers"].split())
         r["bonus"] = int(r["bonus"]) if r.get("bonus") not in (None, "") else None
         out.append(r)
@@ -403,13 +405,13 @@ def score_pick3(p, r, wild):
     pos = sum(a == b for a, b in zip(p, r)); com = sum((cnt(p) & cnt(r)).values())
     ws = wb = False
     if wild is not None:
-        for i in range(3):
+        for i in range(len(r)):
             r2 = r[:i] + str(wild) + r[i+1:]
             ws |= p == r2; wb |= sorted(p) == sorted(r2)
     s = dict(straight=p == r, box=sorted(p) == sorted(r) and p != r,
              wild_straight=ws and p != r, wild_box=wb and not ws and sorted(p) != sorted(r),
-             front_pair=p[:2] == r[:2], back_pair=p[1:] == r[1:], digits=com, positions=pos)
-    s["any_win"] = s["straight"] or s["box"] or s["wild_straight"] or s["wild_box"] or s["front_pair"] or s["back_pair"]
+             front_pair=p[:2] == r[:2], back_pair=p[-2:] == r[-2:], digits=com, positions=pos)
+    s["any_win"] = s["straight"] or s["box"] or s["wild_straight"] or s["wild_box"] or (len(r) == 3 and (s["front_pair"] or s["back_pair"]))
     return s
 
 def score_lotto(t, r_main, r_bonus):
@@ -448,7 +450,8 @@ def report(only=None):
             for m, s in sorted(rows):
                 print(f"{m:22}{s['tickets']:>5}{s['straight']:>5}{s['box']:>5}{s['wild_straight']:>6}{s['wild_box']:>6}"
                       f"{s['front_pair']+s['back_pair']:>5}{s['any_win']:>5}{s['two_plus_digits']:>6}{s['digits']/s['tickets']:>7.2f}")
-            print("Chance per ticket: any digit-match avg 0.73; 2+ digits ~13%; straight 0.1%; front/back pair 1% each.")
+            if game == "pick4": print("Chance per ticket: avg digits shared 1.21; straight 0.01%. Pair columns are shown for interest only (not counted as Pick 4 wins).")
+            else: print("Chance per ticket: any digit-match avg 0.73; 2+ digits ~13%; straight 0.1%; front/back pair 1% each.")
         else:
             print(f"{'Method':22}{'tix':>5}{'avgWhite':>9}{'bonus':>6}{'anyWin':>7}")
             for m, s in sorted(rows):
@@ -490,7 +493,7 @@ def export(outdir):
                          avg_match=round(c["match"] / t, 3) if t else None, near=c["near"]))
     # expected per ticket under chance
     for r in rows:
-        r["expected_avg_match"] = 0.73 if r["game"] == "pick3" else round(25 / GAMES[r["game"]]["main"], 3)
+        r["expected_avg_match"] = {"pick3": 0.73, "pick4": 1.21}.get(r["game"]) or round(25 / GAMES[r["game"]]["main"], 3)
     os.makedirs(outdir, exist_ok=True)
     json.dump(rows, open(os.path.join(outdir, "methods.json"), "w"), indent=1)
     draws.sort(key=lambda d: (d["date"], d["game"], d["draw"]), reverse=True)
@@ -505,13 +508,13 @@ def audit(game, draw=None, sims=2000):
     g = GAMES[game]; h = history(game, draw)
     if len(h) < 20: print(f"Only {len(h)} results on file for {game}; load more history first."); return
     if g["kind"] == "digits":
-        U = list(range(10)); draws = [[int(c) for c in r["numbers"]] for r in h]
-        fair = lambda: [[secrets.randbelow(10) for _ in range(3)] for _ in draws]
+        U = list(range(10)); N = g["n"]; draws = [[int(c) for c in r["numbers"]] for r in h]
+        fair = lambda: [[secrets.randbelow(10) for _ in range(N)] for _ in draws]
         def stats(D):
             n = len(D); flat = [x for d in D for x in d]
-            fc = Counter(flat); e = 3 * n / 10
+            fc = Counter(flat); e = N * n / 10
             freq = sum((fc[u] - e) ** 2 / e for u in U)
-            pos = sum(sum((Counter(d[i] for d in D)[u] - n / 10) ** 2 / (n / 10) for u in U) for i in range(3))
+            pos = sum(sum((Counter(d[i] for d in D)[u] - n / 10) ** 2 / (n / 10) for u in U) for i in range(N))
             pc = Counter(tuple(sorted(p)) for d in D for p in itertools.combinations(set(d), 2))
             pairmax = max(pc.values()) if pc else 0
             rep = sum(len(set(a) & set(b)) > 0 for a, b in zip(D, D[1:]))
@@ -545,6 +548,7 @@ def selftest():
     assert king_wen([1]*6)[0] == 1 and king_wen([0]*6)[0] == 2 and king_wen([1,0,0,0,1,0])[0] == 3
     assert king_wen([0,1,0,0,0,1])[0] == 4 and king_wen([1,0,1,0,1,0])[0] == 63 and king_wen([0,1,0,1,0,1])[0] == 64
     assert score_pick3("314", "314", 9)["straight"]
+    assert score_pick3("1234", "4321", 0)["box"] and score_pick3("1239", "1234", 9)["wild_straight"]
     assert score_pick3("279", "799", 2)["wild_box"]
     assert len(DECK) == 78
     print("Self-test passed.")
