@@ -1,0 +1,136 @@
+<meta name="dash-one-writer">
+<style>
+  .ol-wrap { display: flex; flex-direction: column; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); }
+  .ol-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; }
+  .ol-lede { color: var(--color-fg-muted); margin: 0; }
+  .ol-lede b { color: var(--color-fg); font-variant-numeric: tabular-nums; }
+  .ol-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+  .ol-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .ol-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; }
+  .ol-scroll { overflow-x: auto; }
+  .ol-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
+  .ol-table th, .ol-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .ol-table th { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+  .ol-table td.num, .ol-table th.num { text-align: right; }
+  .ol-control td { font-weight: var(--cds-font-weight-medium); }
+  .ol-pending { color: var(--color-fg-muted); }
+  .ol-scored { color: var(--color-ok); }
+  .ol-row { display: flex; gap: var(--cds-gap-sm); align-items: center; flex-wrap: wrap; }
+  [data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="ol-wrap">
+  <header id="top">
+    <h1 class="ol-title">Oracle Lab Scoreboard</h1>
+    <p class="ol-lede">So far <b data-source="summary" data-field="scored_tickets" data-row="0" data-draw="s_scored">—</b> tickets have been scored across <b data-source="summary" data-field="scored_drawings" data-row="0" data-draw="s_draws">—</b> drawings, with <b data-source="summary" data-field="pending_tickets" data-row="0" data-draw="s_pending">—</b> more locked and waiting for results. Every method is judged against the Random Control on the same drawings.</p>
+  </header>
+
+  <section class="ol-card" id="methods">
+    <div class="ol-row">
+      <h2>Methods vs. chance</h2>
+      <select class="dash-select" data-draw="gamepick" aria-label="Game">
+        <option value="pick3">PA Pick 3</option>
+        <option value="powerball">Powerball</option>
+        <option value="megamillions">Mega Millions</option>
+      </select>
+    </div>
+    <p class="ol-note">Avg match = digits shared with the result (Pick 3) or white balls matched (Powerball, Mega Millions), per ticket. Chance level is shown in the last column. Wins include Wild Ball, box and pair prizes for Pick 3, and any prize tier for the big games.</p>
+    <div class="ol-scroll">
+      <table class="ol-table" data-source="methods" data-row-key="game,method">
+        <thead><tr>
+          <th data-field="method">Method</th>
+          <th class="num" data-field="tickets">Scored</th>
+          <th class="num" data-field="wins">Wins</th>
+          <th class="num" data-field="avg_match">Avg match</th>
+          <th class="num" data-field="expected_avg_match">Chance</th>
+          <th class="num" data-field="pending">Pending</th>
+        </tr></thead>
+        <tbody data-draw="methods"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ol-card" id="drawings">
+    <h2>Locked drawings</h2>
+    <p class="ol-note">Each batch was locked before its drawing. The lock code is the first 16 characters of its SHA-256 fingerprint in the repo's picks log.</p>
+    <div class="ol-scroll">
+      <table class="ol-table" data-source="draws" data-row-key="lock_code">
+        <thead><tr>
+          <th data-field="date">Drawing date</th>
+          <th data-field="game">Game</th>
+          <th data-field="draw">Draw</th>
+          <th data-field="locked_et">Locked</th>
+          <th data-field="lock_code">Lock code</th>
+          <th data-field="result">Result</th>
+          <th data-field="status">Status</th>
+        </tr></thead>
+        <tbody data-draw="draws"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+  dash.calc('summary', {
+    inputs: ['methods', 'draws'],
+    title: 'Scoreboard totals',
+    description: 'Scored and pending tickets summed over all methods; drawings with a result.',
+    fn: (methods, draws) => [{
+      scored_tickets: d3.sum(methods, (r) => +r.tickets),
+      pending_tickets: d3.sum(methods, (r) => +r.pending),
+      scored_drawings: new Set(draws.filter((d) => d.status === 'scored').map((d) => d.game + d.date + d.draw)).size,
+    }],
+  });
+
+  const GAME_NAMES = { pick3: 'PA Pick 3', powerball: 'Powerball', megamillions: 'Mega Millions' };
+  const fmt3 = d3.format('.2f');
+
+  for (const [name, field] of [['s_scored', 'scored_tickets'], ['s_draws', 'scored_drawings'], ['s_pending', 'pending_tickets']]) {
+    dash.draw(name, (el) => {
+      const s = dash.data('summary');
+      el.textContent = s.status === 'ok' && s.data && s.data[0] ? d3.format(',')(s.data[0][field]) : '—';
+    });
+  }
+
+  dash.draw('gamepick', (sel) => {
+    sel.value = dash.params().game || 'pick3';
+    sel.onchange = () => dash.setParams({ game: sel.value });
+  });
+
+  dash.draw('methods', (tb) => {
+    const m = dash.data('methods');
+    tb.replaceChildren();
+    if (m.status !== 'ok') {
+      const tr = tb.insertRow(); const td = tr.insertCell(); td.colSpan = 6;
+      td.textContent = m.status === 'error' ? 'Failed to load' : '—'; return;
+    }
+    const game = dash.params().game || 'pick3';
+    const rows = m.data.filter((r) => r.game === game)
+      .sort((a, b) => (a.method === 'Random Control') - (b.method === 'Random Control') || a.method.localeCompare(b.method));
+    for (const r of rows) {
+      const tr = tb.insertRow();
+      tr.dataset.key = encodeURIComponent(r.game) + ',' + encodeURIComponent(r.method);
+      if (r.method === 'Random Control') tr.className = 'ol-control';
+      const cells = [r.method, r.tickets, r.wins, r.avg_match == null ? '—' : fmt3(r.avg_match), fmt3(r.expected_avg_match), r.pending];
+      cells.forEach((v, i) => { const td = tr.insertCell(); td.textContent = v; if (i) td.className = 'num'; });
+    }
+    if (!rows.length) { const td = tb.insertRow().insertCell(); td.colSpan = 6; td.textContent = 'No picks locked for ' + GAME_NAMES[game] + ' yet.'; }
+  });
+
+  dash.draw('draws', (tb) => {
+    const d = dash.data('draws');
+    tb.replaceChildren();
+    if (d.status !== 'ok') {
+      const td = tb.insertRow().insertCell(); td.colSpan = 7;
+      td.textContent = d.status === 'error' ? 'Failed to load' : '—'; return;
+    }
+    for (const r of d.data.slice(0, 60)) {
+      const tr = tb.insertRow();
+      tr.dataset.key = encodeURIComponent(r.lock_code);
+      [r.date, GAME_NAMES[r.game] || r.game, r.draw, r.locked_et, r.lock_code, r.result || '—', r.status].forEach((v, i) => {
+        const td = tr.insertCell(); td.textContent = v;
+        if (i === 6) td.className = v === 'scored' ? 'ol-scored' : 'ol-pending';
+      });
+    }
+  });
+</script>

@@ -1,0 +1,82 @@
+[
+ {
+  "game": "megamillions",
+  "date": "2026-11-17",
+  "draw": "Main",
+  "locked_et": "2026-11-15 10:07:20 AM ET",
+  "lock_code": "ddbc840872c1bdb0",
+  "methods": 5,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "megamillions",
+  "date": "2026-11-17",
+  "draw": "Main",
+  "locked_et": "2026-11-15 10:15:20 AM ET",
+  "lock_code": "626d6a5e09bdc488",
+  "methods": 1,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "powerball",
+  "date": "2026-11-16",
+  "draw": "Main",
+  "locked_et": "2026-11-15 10:07:20 AM ET",
+  "lock_code": "f6cea19def39afd8",
+  "methods": 5,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "powerball",
+  "date": "2026-11-16",
+  "draw": "Main",
+  "locked_et": "2026-11-15 10:15:20 AM ET",
+  "lock_code": "1474e4e3caa88e96",
+  "methods": 1,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "pick3",
+  "date": "2026-11-15",
+  "draw": "Evening",
+  "locked_et": "2026-11-15 10:07:07 AM ET",
+  "lock_code": "c972bdc61fa7bb4b",
+  "methods": 8,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "pick3",
+  "date": "2026-11-15",
+  "draw": "Evening",
+  "locked_et": "2026-11-15 10:10:58 AM ET",
+  "lock_code": "9bdf571b1b573cab",
+  "methods": 2,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "pick3",
+  "date": "2026-11-15",
+  "draw": "Day",
+  "locked_et": "2026-11-15 10:07:07 AM ET",
+  "lock_code": "990741a74436d697",
+  "methods": 8,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "pick3",
+  "date": "2026-11-15",
+  "draw": "Day",
+  "locked_et": "2026-11-15 10:10:58 AM ET",
+  "lock_code": "c6e52af3667aaa8d",
+  "methods": 2,
+  "result": "",
+  "status": "pending"
+ }
+]

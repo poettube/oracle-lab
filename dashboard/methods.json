@@ -1,0 +1,222 @@
+[
+ {
+  "game": "megamillions",
+  "method": "I Ching",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.357
+ },
+ {
+  "game": "megamillions",
+  "method": "Ifa",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.357
+ },
+ {
+  "game": "megamillions",
+  "method": "Napoleon's Oraculum",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.357
+ },
+ {
+  "game": "megamillions",
+  "method": "Random Control",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.357
+ },
+ {
+  "game": "megamillions",
+  "method": "Tarot",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.357
+ },
+ {
+  "game": "megamillions",
+  "method": "Unpopular Numbers",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.357
+ },
+ {
+  "game": "pick3",
+  "method": "Historic Hot-Cold",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "pick3",
+  "method": "Hot-Cold",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "pick3",
+  "method": "I Ching",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "pick3",
+  "method": "Ifa",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "pick3",
+  "method": "Napoleon's Oraculum",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "pick3",
+  "method": "Overdue",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "pick3",
+  "method": "Prime",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "pick3",
+  "method": "Random Control",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "pick3",
+  "method": "Recurring Pairs",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "pick3",
+  "method": "Tarot",
+  "tickets": 0,
+  "pending": 6,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.73
+ },
+ {
+  "game": "powerball",
+  "method": "I Ching",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.362
+ },
+ {
+  "game": "powerball",
+  "method": "Ifa",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.362
+ },
+ {
+  "game": "powerball",
+  "method": "Napoleon's Oraculum",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.362
+ },
+ {
+  "game": "powerball",
+  "method": "Random Control",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.362
+ },
+ {
+  "game": "powerball",
+  "method": "Tarot",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.362
+ },
+ {
+  "game": "powerball",
+  "method": "Unpopular Numbers",
+  "tickets": 0,
+  "pending": 3,
+  "wins": 0,
+  "avg_match": null,
+  "near": 0,
+  "expected_avg_match": 0.362
+ }
+]

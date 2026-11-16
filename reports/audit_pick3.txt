@@ -1,0 +1,9 @@
+RANDOMNESS AUDIT — pick3  — 77 drawings, 2000 simulated fair histories
+
+Test                        Observed  Fair avg  p-value  Verdict
+frequency                       14.8       9.0    0.191  consistent with random
+positions                       33.5      26.9    0.346  consistent with random
+top_pair                         8.0       9.1    0.676  consistent with random
+repeats_from_last_draw          42.0      46.5    0.338  consistent with random
+
+With several tests, one p-value under 0.05 now and then is expected by luck alone.
