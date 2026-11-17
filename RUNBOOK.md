@@ -38,7 +38,8 @@ Powerball or Mega Millions from earlier nights):
   `python3 oracle_lab.py predict megamillions TODAY`.
 - If `dreams/TODAY.txt` exists in the repo, pass its text with `--dream "..."` to the
   Pick 3 and Pick 4 predictions.
-- Never re-run predict for a drawing that already has a full batch locked.
+- Never re-run predict for a drawing that already has a full batch locked. Check picks.jsonl for game+date+draw first (Powerball/Mega Millions are often locked days ahead).
+- If the push to GitHub fails, do NOT keep the run's new locks secret: report the failure and the lock codes in the summary.
 
 ## 3. Save and publish
 - `python3 oracle_lab.py verify` again.

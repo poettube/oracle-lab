@@ -31,6 +31,10 @@ from zoneinfo import ZoneInfo
 HERE = os.path.dirname(os.path.abspath(__file__))
 PICKS = os.path.join(HERE, "picks.jsonl")
 RESULTS = os.path.join(HERE, "results.csv")
+VOIDF = os.path.join(HERE, "VOID.txt")
+def voided():
+    if not os.path.exists(VOIDF): return set()
+    return {l.split()[0] for l in open(VOIDF) if l.strip() and not l.startswith("#")}
 ET = ZoneInfo("America/New_York")
 PICKS_PER_METHOD = 3
 rng = secrets.SystemRandom()
@@ -425,6 +429,7 @@ def report(only=None):
     if not os.path.exists(PICKS): print("No picks locked yet."); return
     for line in open(PICKS):
         b = json.loads(line)
+        if b["hash"][:16] in voided(): continue
         if only and b["game"] != only: continue
         r = res.get((b["game"], b["date"], b["draw"]))
         if not r: continue
@@ -469,6 +474,7 @@ def export(outdir):
     if os.path.exists(PICKS):
         for line in open(PICKS):
             b = json.loads(line); g = GAMES[b["game"]]
+            if b["hash"][:16] in voided(): continue
             r = res.get((b["game"], b["date"], b["draw"]))
             if r: rs = r["numbers"] if g["kind"] == "digits" else " ".join(f"{x:02d}" for x in r["numbers"]) + f" + {r['bonus']:02d}"
             draws.append(dict(game=b["game"], date=b["date"], draw=b["draw"], locked_et=b["locked_et"],
