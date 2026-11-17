@@ -1,15 +1,30 @@
 
 === PICK3 ===
 Method                  tix  str  box wildS wildB pair  any 2+dig avgDig
-Historic Hot-Cold         6    0    0     0     0    0    0     0   0.33
-Hot-Cold                  6    0    0     0     0    0    0     0   0.50
-I Ching                   6    0    0     0     1    0    1     1   1.00
-Ifa                       6    0    0     0     0    0    0     3   1.17
-Napoleon's Oraculum       6    0    0     0     0    0    0     1   0.83
-Overdue                   6    0    0     0     0    0    0     2   1.17
-Prime                     6    0    0     0     0    0    0     0   1.00
-Random Control            6    0    0     0     0    0    0     0   1.00
-Recurring Pairs           6    0    0     0     0    0    0     0   0.50
-Tarot                     6    0    0     0     0    0    0     1   0.67
+Historic Hot-Cold        12    0    0     0     0    0    0     0   0.50
+Hot-Cold                 12    0    0     0     0    0    0     0   0.42
+I Ching                  12    0    0     0     1    0    1     1   0.83
+Ifa                      12    0    0     0     0    0    0     3   1.00
+Napoleon's Oraculum      12    0    0     0     0    0    0     1   0.75
+Overdue                  12    0    0     0     0    1    1     3   1.08
+Prime                    12    0    0     0     0    0    0     0   0.83
+Random Control           12    0    0     0     0    0    0     1   1.00
+Recurring Pairs          12    0    0     0     0    0    0     0   0.67
+Tarot                    12    0    0     0     0    0    0     3   0.92
 Chance per ticket: any digit-match avg 0.73; 2+ digits ~13%; straight 0.1%; front/back pair 1% each.
+Compare every method to 'Random Control'. Small samples swing a lot — judge after 30+ drawings.
+
+=== PICK4 ===
+Method                  tix  str  box wildS wildB pair  any 2+dig avgDig
+Historic Hot-Cold         6    0    0     0     0    0    0     3   1.17
+Hot-Cold                  6    0    0     0     0    0    0     1   0.67
+I Ching                   6    0    0     0     0    0    0     3   1.17
+Ifa                       6    0    0     0     0    0    0     2   0.67
+Napoleon's Oraculum       6    0    0     0     0    0    0     3   1.33
+Overdue                   6    0    0     0     0    0    0     2   1.17
+Prime                     6    0    0     0     0    2    0     3   1.50
+Random Control            6    0    0     0     0    0    0     1   0.83
+Recurring Pairs           6    0    0     0     0    0    0     0   0.50
+Tarot                     6    0    0     0     0    0    0     1   1.00
+Chance per ticket: avg digits shared 1.21; straight 0.01%. Pair columns are shown for interest only (not counted as Pick 4 wins).
 Compare every method to 'Random Control'. Small samples swing a lot — judge after 30+ drawings.
