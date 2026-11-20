@@ -1,13 +1,43 @@
 [
  {
   "game": "pick4",
+  "date": "2026-11-20",
+  "draw": "Evening",
+  "locked_et": "2026-11-20 01:43:06 PM ET",
+  "lock_code": "83f8c6666ce76e8b",
+  "methods": 10,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "pick3",
+  "date": "2026-11-20",
+  "draw": "Evening",
+  "locked_et": "2026-11-20 01:43:06 PM ET",
+  "lock_code": "a740c86884c1c6af",
+  "methods": 10,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "megamillions",
+  "date": "2026-11-20",
+  "draw": "Main",
+  "locked_et": "2026-11-20 01:43:06 PM ET",
+  "lock_code": "3900eac38ece1798",
+  "methods": 6,
+  "result": "",
+  "status": "pending"
+ },
+ {
+  "game": "pick4",
   "date": "2026-11-17",
   "draw": "Evening",
   "locked_et": "2026-11-17 02:51:07 PM ET",
   "lock_code": "ab41a44cc5c9718c",
   "methods": 10,
-  "result": "",
-  "status": "pending"
+  "result": "1866 WB 0",
+  "status": "scored"
  },
  {
   "game": "pick3",
@@ -16,8 +46,8 @@
   "locked_et": "2026-11-17 02:51:07 PM ET",
   "lock_code": "f76a0ff80e6ed101",
   "methods": 10,
-  "result": "",
-  "status": "pending"
+  "result": "920 WB 0",
+  "status": "scored"
  },
  {
   "game": "megamillions",
@@ -26,8 +56,8 @@
   "locked_et": "2026-11-15 10:07:20 AM ET",
   "lock_code": "ddbc840872c1bdb0",
   "methods": 5,
-  "result": "",
-  "status": "pending"
+  "result": "03 10 19 28 33 + 21",
+  "status": "scored"
  },
  {
   "game": "megamillions",
@@ -36,8 +66,8 @@
   "locked_et": "2026-11-15 10:15:20 AM ET",
   "lock_code": "626d6a5e09bdc488",
   "methods": 1,
-  "result": "",
-  "status": "pending"
+  "result": "03 10 19 28 33 + 21",
+  "status": "scored"
  },
  {
   "game": "powerball",
@@ -46,8 +76,8 @@
   "locked_et": "2026-11-15 10:07:20 AM ET",
   "lock_code": "f6cea19def39afd8",
   "methods": 5,
-  "result": "",
-  "status": "pending"
+  "result": "17 35 48 60 69 + 17",
+  "status": "scored"
  },
  {
   "game": "powerball",
@@ -56,8 +86,8 @@
   "locked_et": "2026-11-15 10:15:20 AM ET",
   "lock_code": "1474e4e3caa88e96",
   "methods": 1,
-  "result": "",
-  "status": "pending"
+  "result": "17 35 48 60 69 + 17",
+  "status": "scored"
  },
  {
   "game": "pick4",

@@ -1,30 +1,52 @@
 
 === PICK3 ===
 Method                  tix  str  box wildS wildB pair  any 2+dig avgDig
-Historic Hot-Cold        12    0    0     0     0    0    0     0   0.50
-Hot-Cold                 12    0    0     0     0    0    0     0   0.42
-I Ching                  12    0    0     0     1    0    1     1   0.83
-Ifa                      12    0    0     0     0    0    0     3   1.00
-Napoleon's Oraculum      12    0    0     0     0    0    0     1   0.75
-Overdue                  12    0    0     0     0    1    1     3   1.08
-Prime                    12    0    0     0     0    0    0     0   0.83
-Random Control           12    0    0     0     0    0    0     1   1.00
-Recurring Pairs          12    0    0     0     0    0    0     0   0.67
-Tarot                    12    0    0     0     0    0    0     3   0.92
+Historic Hot-Cold        15    0    0     0     0    0    0     0   0.40
+Hot-Cold                 15    0    0     0     0    0    0     1   0.60
+I Ching                  15    0    0     0     2    0    2     2   0.80
+Ifa                      15    0    0     0     0    0    0     3   0.93
+Napoleon's Oraculum      15    0    0     0     0    0    0     1   0.73
+Overdue                  15    0    0     0     0    1    1     3   0.93
+Prime                    15    0    0     0     0    0    0     0   0.80
+Random Control           15    0    0     0     0    0    0     1   0.87
+Recurring Pairs          15    0    0     0     0    0    0     2   0.87
+Tarot                    15    0    0     0     0    0    0     3   0.93
 Chance per ticket: any digit-match avg 0.73; 2+ digits ~13%; straight 0.1%; front/back pair 1% each.
 Compare every method to 'Random Control'. Small samples swing a lot — judge after 30+ drawings.
 
 === PICK4 ===
 Method                  tix  str  box wildS wildB pair  any 2+dig avgDig
-Historic Hot-Cold         6    0    0     0     0    0    0     3   1.17
-Hot-Cold                  6    0    0     0     0    0    0     1   0.67
-I Ching                   6    0    0     0     0    0    0     3   1.17
-Ifa                       6    0    0     0     0    0    0     2   0.67
-Napoleon's Oraculum       6    0    0     0     0    0    0     3   1.33
-Overdue                   6    0    0     0     0    0    0     2   1.17
-Prime                     6    0    0     0     0    2    0     3   1.50
-Random Control            6    0    0     0     0    0    0     1   0.83
-Recurring Pairs           6    0    0     0     0    0    0     0   0.50
-Tarot                     6    0    0     0     0    0    0     1   1.00
+Historic Hot-Cold         9    0    0     0     0    1    0     5   1.22
+Hot-Cold                  9    0    0     0     0    2    0     4   1.11
+I Ching                   9    0    0     0     0    0    0     5   1.33
+Ifa                       9    0    0     0     0    0    0     4   0.89
+Napoleon's Oraculum       9    0    0     0     0    0    0     5   1.44
+Overdue                   9    0    0     0     0    0    0     2   0.78
+Prime                     9    0    0     0     0    2    0     3   1.00
+Random Control            9    0    0     0     0    0    0     3   1.11
+Recurring Pairs           9    0    0     0     0    0    0     3   1.22
+Tarot                     9    0    0     0     0    0    0     1   0.78
 Chance per ticket: avg digits shared 1.21; straight 0.01%. Pair columns are shown for interest only (not counted as Pick 4 wins).
+Compare every method to 'Random Control'. Small samples swing a lot — judge after 30+ drawings.
+
+=== POWERBALL ===
+Method                  tix avgWhite bonus anyWin
+I Ching                   3    0.000     0      0
+Ifa                       3    0.333     0      0
+Napoleon's Oraculum       3    0.000     0      0
+Random Control            3    0.000     0      0
+Tarot                     3    0.333     0      0
+Unpopular Numbers         3    0.333     1      1
+Chance per ticket: avg white matches 0.362; bonus 1 in 26; any prize ~1 in 24.
+Compare every method to 'Random Control'. Small samples swing a lot — judge after 30+ drawings.
+
+=== MEGAMILLIONS ===
+Method                  tix avgWhite bonus anyWin
+I Ching                   3    0.667     0      0
+Ifa                       3    0.333     0      0
+Napoleon's Oraculum       3    1.333     0      0
+Random Control            3    0.000     0      0
+Tarot                     3    0.667     0      0
+Unpopular Numbers         3    0.000     1      1
+Chance per ticket: avg white matches 0.357; bonus 1 in 24; any prize ~1 in 24.
 Compare every method to 'Random Control'. Small samples swing a lot — judge after 30+ drawings.
