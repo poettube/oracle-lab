@@ -1,0 +1,9 @@
+# Batches locked by a run whose push to GitHub failed. Their picks never reached this repo,
+# so they are not in the hash chain and cannot be scored. Lock codes are recorded here for the record.
+# date        game          draw     lock_code         locked
+2026-11-20  pick3         Day      7c56d7a848fab27b  08:40:46 AM ET
+2026-11-20  pick3         Evening  9a3c8ce767c01da5  08:40:47 AM ET
+2026-11-20  pick4         Day      49d8f48aa6bc0c40  08:40:47 AM ET
+2026-11-20  pick4         Evening  6c0eaab89db0852a  08:40:47 AM ET
+2026-11-20  megamillions  Main     6207cab6a5909b18  08:40:47 AM ET
+# The 1:43 PM ET locks for 11/20 Evening and Mega Millions (in picks.jsonl) are the ones scored.
